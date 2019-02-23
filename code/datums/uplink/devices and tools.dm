@@ -115,3 +115,10 @@
 	item_cost = 30
 	path = /obj/item/device/radio/intercept
 	desc = "A radio that can intercept secure radio channels. Doesn't fit in pockets."
+	
+/datum/uplink_item/tools/ttv
+	name = "Binary Gas Bomb"
+	item_cost = 40
+	path = /obj/effect/spawner/newbomb
+	desc = "A remote-activated phoron-oxygen bomb assembly with built-in signaller. \
+			A flashing disclaimer begins with the warning 'SOME DISASSEMBLY/REASSEMBLY REQUIRED.'"
