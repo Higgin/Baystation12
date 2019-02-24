@@ -116,7 +116,7 @@
 	path = /obj/item/device/radio/intercept
 	desc = "A radio that can intercept secure radio channels. Doesn't fit in pockets."
 	
-/datum/uplink_item/tools/ttv
+/datum/uplink_item/item/tools/ttv
 	name = "Binary Gas Bomb"
 	item_cost = 40
 	path = /obj/effect/spawner/newbomb
