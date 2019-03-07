@@ -101,7 +101,9 @@
 		"Amethyst"    = "_purple",
 		"Sapphire"    = "_blue",
 		"Ruby"        = "_red",
-		"Topaz"       = "_yellow"
+		"Topaz"       = "_yellow",
+		"Quartz"      = "_white",
+		"Jet"         = "_black"
 	)
 
 /datum/species/adherent/New()
@@ -120,7 +122,7 @@
 	. = FALSE
 	if(H && H.stat == CONSCIOUS)
 		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
-			if(istype(float) && float.active && float.is_usable())
+			if(float.active && float.is_usable())
 				. = TRUE
 				break
 

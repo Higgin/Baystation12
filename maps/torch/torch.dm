@@ -39,6 +39,7 @@
 	#include "items/clothing/solgov-accessory.dm"
 	#include "items/clothing/solgov-armor.dm"
 	#include "items/clothing/solgov-feet.dm"
+	#include "items/clothing/solgov-hands.dm"
 	#include "items/clothing/solgov-head.dm"
 	#include "items/clothing/solgov-suit.dm"
 	#include "items/clothing/solgov-under.dm"
@@ -51,7 +52,6 @@
 
 
 	#include "job/torch_access.dm"
-	#include "job/torch_outfits.dm"
 	#include "job/torch_jobs.dm"
 	#include "job/command_jobs.dm"
 	#include "job/corporate_jobs.dm"
@@ -63,6 +63,20 @@
 	#include "job/security_jobs.dm"
 	#include "job/service_jobs.dm"
 	#include "job/supply_jobs.dm"
+
+	#include "job/outfits/torch_outfits.dm"
+	#include "job/outfits/command_outfits.dm"
+	#include "job/outfits/corporate_outfits.dm"
+	#include "job/outfits/engineering_outfits.dm"
+	#include "job/outfits/exploration_outfits.dm"
+	#include "job/outfits/medical_outfits.dm"
+	#include "job/outfits/misc_outfits.dm"
+	#include "job/outfits/research_outfits.dm"
+	#include "job/outfits/security_outfits.dm"
+	#include "job/outfits/service_outfits.dm"
+	#include "job/outfits/supply_outfits.dm"
+	#include "job/outfits/unused_outfits.dm"
+
 
 	#include "machinery/apc_shuttle.dm"
 	#include "machinery/keycard authentication.dm"
