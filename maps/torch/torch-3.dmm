@@ -217,7 +217,7 @@
 	name = "exterior access button";
 	pixel_x = -24;
 	pixel_y = -24;
-	req_access = list(11,13)
+	req_access = list("ACCESS_ENGINE_EQUIP","ACCESS_EXTERNAL")
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -297,7 +297,7 @@
 	frequency = 1379;
 	id_tag = "solar_starboard_airlock";
 	pixel_x = 24;
-	req_access = list(13);
+	req_access = list("ACCESS_EXTERNAL");
 	tag_airpump = "solar_starboard_pump";
 	tag_chamber_sensor = "solar_starboard_sensor";
 	tag_exterior_door = "solar_starboard_outer";
@@ -857,7 +857,7 @@
 	name = "interior access button";
 	pixel_x = 24;
 	pixel_y = 24;
-	req_access = list(11,13)
+	req_access = list("ACCESS_ENGINE_EQUIP","ACCESS_EXTERNAL")
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -1022,7 +1022,7 @@
 	frequency = 1379;
 	id_tag = "auxdock_airlock";
 	pixel_x = 0;
-	req_access = list(13);
+	req_access = list("ACCESS_EXTERNAL");
 	tag_airpump = "auxdock_pump";
 	tag_chamber_sensor = "auxdock_sensor";
 	tag_exterior_door = "auxdock_outer";
@@ -1218,7 +1218,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	name = "Secure Tech Storage";
 	autoset_access = 0;
-	req_access = list(23,19)
+	req_access = list("ACCESS_BRIDGE","ACCESS_TECH_STORAGE")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1422,6 +1422,12 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
+"dd" = (
+/obj/machinery/door/airlock/civilian{
+	name = "Custodial Closet"
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/janitor)
 "de" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance{
@@ -2801,7 +2807,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /obj/item/stack/material/aluminium/fifty,
 /obj/item/stack/material/plastic/ten,
@@ -3748,7 +3754,7 @@
 	icon_state = "2-8"
 	},
 /obj/effect/catwalk_plated,
-/obj/machinery/light{
+/obj/machinery/light/small{
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -4021,11 +4027,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/light{
-	icon_state = "tube1";
+/obj/effect/floor_decal/corner/yellow{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/machinery/light/small{
+	icon_state = "bulb1";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -4161,7 +4167,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/light{
+/obj/machinery/light/small{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -4338,10 +4344,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
+/obj/item/weapon/stool/padded,
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor)
 "jv" = (
@@ -4386,6 +4389,11 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
+/obj/machinery/requests_console{
+	department = "Janitorial";
+	departmentType = 1;
+	pixel_y = -29
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor)
 "jC" = (
@@ -4407,15 +4415,9 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor)
 "jD" = (
-/obj/item/weapon/stool/padded,
 /obj/effect/floor_decal/corner/green{
 	icon_state = "corner_white";
 	dir = 10
-	},
-/obj/machinery/requests_console{
-	department = "Janitorial";
-	departmentType = 1;
-	pixel_y = -29
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor)
@@ -4451,7 +4453,7 @@
 	name = "Door Bolt Control";
 	pixel_x = -24;
 	pixel_y = -24;
-	req_access = list(10);
+	req_access = list("ACCESS_ENGINEERING");
 	specialfunctions = 4
 	},
 /obj/structure/cable/yellow{
@@ -4605,7 +4607,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_access = list(list(24,11))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /obj/structure/cable/green{
 	d2 = 8;
@@ -5265,7 +5267,7 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /obj/machinery/camera/network/second_deck{
 	c_tag = "Second Deck - Stairwell";
@@ -5540,7 +5542,7 @@
 /obj/machinery/computer/fusion/fuel_control{
 	icon_state = "computer";
 	dir = 4;
-	req_access = list(11);
+	req_access = list("ACCESS_ENGINE_EQUIP");
 	initial_id_tag = "aux_fusion_plant"
 	},
 /obj/effect/floor_decal/corner/yellow/half{
@@ -5575,8 +5577,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass,
-/turf/simulated/floor/tiled/steel_ridged,
+/obj/machinery/door/airlock,
+/turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/center)
 "mj" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -6768,12 +6770,12 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/door/airlock/glass,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/airlock,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/seconddeck)
 "po" = (
@@ -7054,10 +7056,6 @@
 "pJ" = (
 /obj/item/device/radio/beacon,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck Hallway - Fore Central";
-	dir = 4
-	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/fore)
 "pK" = (
@@ -7157,7 +7155,7 @@
 	name = "Engine Emitter";
 	pixel_x = 6;
 	pixel_y = 7;
-	req_access = list(10)
+	req_access = list("ACCESS_ENGINEERING")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -9590,9 +9588,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/seconddeck)
 "vH" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/firedoor/border_only,
-/turf/simulated/floor/plating,
+/turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/seconddeck)
 "vI" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
@@ -10267,10 +10263,6 @@
 	pixel_x = 24
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck Hallway - Fore Central West";
-	dir = 8
-	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/fore)
 "xT" = (
@@ -10615,13 +10607,13 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/door/airlock,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/seconddeck/elevator)
 "yQ" = (
@@ -12575,7 +12567,7 @@
 	name = "interior access button";
 	pixel_x = 24;
 	pixel_y = -24;
-	req_access = list(11,13)
+	req_access = list("ACCESS_ENGINE_EQUIP","ACCESS_MAINTENANCE")
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 8;
@@ -12837,7 +12829,7 @@
 	frequency = 1379;
 	id_tag = "solar_port_airlock";
 	pixel_x = 24;
-	req_access = list(13);
+	req_access = list("ACCESS_EXTERNAL");
 	tag_airpump = "solar_port_pump";
 	tag_chamber_sensor = "solar_port_sensor";
 	tag_exterior_door = "solar_port_outer";
@@ -13034,7 +13026,7 @@
 	name = "exterior access button";
 	pixel_x = -24;
 	pixel_y = 24;
-	req_access = list(11,13)
+	req_access = list("ACCESS_ENGINE_EQUIP","ACCESS_EXTERNAL")
 	},
 /turf/simulated/floor/airless,
 /area/solar/port)
@@ -13911,13 +13903,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
-"GS" = (
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/seconddeck/fore)
 "GW" = (
 /turf/simulated/wall/r_wall/hull,
 /area/storage/tech)
@@ -14846,6 +14831,9 @@
 "JL" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/crew/research,
+/obj/machinery/light/small{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/fore)
 "JN" = (
@@ -15694,7 +15682,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_access = list(list(24,11))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/prototype/control)
@@ -16334,7 +16322,7 @@
 /obj/machinery/computer/fusion/gyrotron{
 	icon_state = "computer";
 	dir = 4;
-	req_access = list(11);
+	req_access = list("ACCESS_ENGINE_EQUIP");
 	initial_id_tag = "aux_fusion_plant"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -16897,7 +16885,7 @@
 /obj/machinery/computer/fusion/core_control{
 	icon_state = "computer";
 	dir = 4;
-	req_access = list(11);
+	req_access = list("ACCESS_ENGINE_EQUIP");
 	initial_id_tag = "aux_fusion_plant"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -17148,7 +17136,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/glass,
+/obj/machinery/door/airlock,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/seconddeck)
 "Sb" = (
@@ -17417,13 +17405,13 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/door/airlock,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/seconddeck/elevator)
 "Tb" = (
@@ -18265,7 +18253,7 @@
 	name = "Fusion Maintenance Access Controller";
 	pixel_x = 0;
 	pixel_y = -21;
-	req_access = list(11);
+	req_access = list("ACCESS_ENGINE_EQUIP");
 	tag_exterior_door = "prototype_exterior";
 	tag_interior_door = "prototype_interior"
 	},
@@ -18852,7 +18840,7 @@
 	name = "Engine Hatch Bolt Control";
 	pixel_x = -24;
 	pixel_y = -10;
-	req_access = list(10);
+	req_access = list("ACCESS_ENGINEERING");
 	specialfunctions = 4
 	},
 /obj/machinery/keycard_auth/torch{
@@ -19296,10 +19284,6 @@
 /obj/structure/sign/warning/biohazard,
 /turf/simulated/wall/prepainted,
 /area/maintenance/disposal)
-"ZA" = (
-/obj/machinery/light,
-/turf/simulated/floor/tiled,
-/area/hallway/primary/seconddeck/fore)
 "ZC" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -19329,7 +19313,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_access = list(list(11,24))
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bluespace)
@@ -32595,7 +32579,7 @@ wE
 RL
 Fu
 jD
-wE
+dd
 dX
 vy
 xn
@@ -32792,7 +32776,7 @@ kD
 kD
 kD
 AI
-ZA
+XA
 wE
 iT
 ju
@@ -33194,7 +33178,7 @@ TH
 GY
 Wr
 UN
-GS
+XA
 hO
 KZ
 qv
