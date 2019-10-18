@@ -60,11 +60,10 @@
 	else
 		set_light(0)
 
-/obj/item/weapon/melee/baton/examine(mob/user)
-	if(!..(user, 1))
-		return 0
-	examine_cell(user)
-	return 1
+/obj/item/weapon/melee/baton/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
+		examine_cell(user)
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
 /obj/item/weapon/melee/baton/proc/examine_cell(mob/user)
@@ -145,8 +144,8 @@
 	var/abuser =  user ? "" : "by [user]"
 	if(user && user.a_intent == I_HURT)
 		. = ..()
-		if (!.)	//item/attack() does it's own messaging and logs
-			return 0	// item/attack() will return 1 if they hit, 0 if they missed.
+		if(.)
+			return
 
 		//whacking someone causes a much poorer electrical contact than deliberately prodding them.
 		stun *= 0.5
@@ -178,7 +177,7 @@
 			var/mob/living/carbon/human/H = target
 			H.forcesay(GLOB.hit_appends)
 
-	return 0
+	return 1
 
 /obj/item/weapon/melee/baton/emp_act(severity)
 	if(bcell)

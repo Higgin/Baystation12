@@ -7,7 +7,6 @@
 	icon_state = "singularity_s1"
 	anchored = 1
 	density = 1
-	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = SINGULARITY_LAYER
 	light_outer_range = 6
 	unacidable = 1 //Don't comment this out.
@@ -414,10 +413,7 @@
 	for(var/mob/living/M in view(toxrange, src.loc))
 		if(M.status_flags & GODMODE)
 			continue
-		toxdamage = (toxdamage - (toxdamage*M.getarmor(null, "rad")))
-		M.apply_effect(toxdamage, TOX)
-	return
-
+		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
 
 /obj/singularity/proc/mezzer()
 	for(var/mob/living/carbon/M in oviewers(8, src))

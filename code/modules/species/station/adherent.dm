@@ -7,10 +7,14 @@
 	whose home system and burgeoning stellar empire was scoured to bedrock by a solar flare. \
 	Physically, they are large, floating squidlike machines made of a crystalline composite."
 	hidden_from_codex = FALSE
+	silent_steps = TRUE
+
+	meat_type = null
+	bone_material = null
+	skin_material = null
 
 	genders =                 list(PLURAL)
 	cyborg_noun =             null
-	silent_steps =            TRUE // Antigravity squids.
 
 	icon_template =           'icons/mob/human_races/species/adherent/template.dmi'
 	icobase =                 'icons/mob/human_races/species/adherent/body.dmi'
@@ -42,7 +46,7 @@
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
-	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
+	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
 	appearance_flags = HAS_EYE_COLOR | HAS_BASE_SKIN_COLOURS
 	blood_color = "#2de00d"
@@ -50,7 +54,6 @@
 	virus_immune = 1
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
-	pixel_offset_y = -4
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
@@ -128,6 +131,9 @@
 
 /datum/species/adherent/can_fall(var/mob/living/carbon/human/H)
 	. = !can_overcome_gravity(H)
+
+/datum/species/adherent/get_slowdown(var/mob/living/carbon/human/H)
+	return slowdown
 
 /datum/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 

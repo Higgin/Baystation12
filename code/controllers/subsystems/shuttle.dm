@@ -13,6 +13,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/last_landmark_registration_time
 	var/list/shuttle_logs = list()               //Keeps records of shuttle movement, format is list(datum/shuttle = datum/shuttle_log)
 	var/list/shuttle_areas = list()              //All the areas of all shuttles.
+	var/list/docking_registry = list()           //Docking controller tag -> docking controller program, mostly for init purposes.
 
 	var/list/landmarks_awaiting_sector = list()  //Stores automatic landmarks that are waiting for a sector to finish loading.
 	var/list/landmarks_still_needed = list()     //Stores landmark_tags that need to be assigned to the sector (landmark_tag = sector) when registered.
@@ -52,9 +53,12 @@ SUBSYSTEM_DEF(shuttle)
 	initialize_sectors()
 
 /datum/controller/subsystem/shuttle/proc/initialize_shuttles()
+	var/list/shuttles_made = list()
 	for(var/shuttle_type in shuttles_to_initialize)
-		initialize_shuttle(shuttle_type)
-	hook_up_motherships(shuttles_to_initialize)
+		var/shuttle = initialize_shuttle(shuttle_type)
+		if(shuttle)
+			shuttles_made += shuttle
+	hook_up_motherships(shuttles_made)
 	shuttles_to_initialize = null
 
 /datum/controller/subsystem/shuttle/proc/initialize_sectors()
@@ -119,6 +123,7 @@ SUBSYSTEM_DEF(shuttle)
 	if(initial(shuttle.category) != shuttle_type)
 		shuttle = new shuttle()
 		shuttle_areas |= shuttle.shuttle_area
+		return shuttle
 
 /datum/controller/subsystem/shuttle/proc/hook_up_motherships(shuttles_list)
 	for(var/datum/shuttle/S in shuttles_list)

@@ -58,7 +58,7 @@ var/global/list/plant_seed_sprites = list()
 		src.desc = "It's labelled as coming from [seed.display_name]."
 
 /obj/item/seeds/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(seed && !seed.roundstart)
 		to_chat(user, "It's tagged as variety #[seed.uid].")
 
@@ -281,3 +281,6 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/algaeseed
 	seed_type = "algae"
+
+/obj/item/seeds/bamboo
+	seed_type = "bamboo"

@@ -6,7 +6,12 @@
 	if(!(. = ..()))
 		return
 	var/obj/O = get_targeted_organ()
-	visible_message("<span class='warning'>[assailant] has grabbed [affecting]'s [O.name]!</span>")
+	if(affecting != assailant)
+		visible_message("<span class='warning'>[assailant] has grabbed [affecting]'s [O.name]!</span>")
+	else
+		var/datum/gender/T = gender_datums[assailant.get_gender()]
+		visible_message("<span class='notice'>[assailant] has grabbed [T.his] [O.name]!</span>")
+
 	if(!(affecting.a_intent == I_HELP))
 		upgrade(TRUE)
 
@@ -177,11 +182,11 @@
 	else
 		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
-	var/armor = target.run_armor_check(BP_HEAD, "melee")
-	target.apply_damage(damage, BRUTE, BP_HEAD, armor, damage_flags)
-	attacker.apply_damage(10, BRUTE, BP_HEAD, attacker.run_armor_check(BP_HEAD, "melee"))
+	var/armor = target.get_blocked_ratio(BP_HEAD, BRUTE, damage = 10)
+	target.apply_damage(damage, BRUTE, BP_HEAD, damage_flags)
+	attacker.apply_damage(10, BRUTE, BP_HEAD)
 
-	if(armor < 50 && target.headcheck(BP_HEAD) && prob(damage))
+	if(armor < 0.5 && target.headcheck(BP_HEAD) && prob(damage))
 		target.apply_effect(20, PARALYZE)
 		target.visible_message("<span class='danger'>[target] [target.species.get_knockout_message(target)]</span>")
 
@@ -195,11 +200,11 @@
 	if(G.special_target_functional)
 		switch(G.target_zone)
 			if(BP_MOUTH)
-				if(G.affecting.silent < 3)
-					G.affecting.silent = 3
+				if(G.affecting.silent < 2)
+					G.affecting.silent = 2
 			if(BP_EYES)
-				if(G.affecting.eye_blind < 3)
-					G.affecting.eye_blind = 3
+				if(G.affecting.eye_blind < 2)
+					G.affecting.eye_blind = 2
 
 // Handles when they change targeted areas and something is supposed to happen.
 /datum/grab/normal/special_target_change(var/obj/item/grab/G, old_zone, new_zone)
@@ -250,17 +255,18 @@
 		return 0
 
 	var/damage_mod = 1
+	var/damage_flags = W.damage_flags()
 	//presumably, if they are wearing a helmet that stops pressure effects, then it probably covers the throat as well
 	var/obj/item/clothing/head/helmet = affecting.get_equipped_item(slot_head)
-	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE))
-		//we don't do an armor_check here because this is not an impact effect like a weapon swung with momentum, that either penetrates or glances off.
-		damage_mod = 1.0 - (helmet.armor["melee"]/100)
+	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.item_flags & ITEM_FLAG_AIRTIGHT) && !isnull(helmet.max_pressure_protection))
+		var/datum/extension/armor/armor_datum = get_extension(helmet, /datum/extension/armor)
+		if(armor_datum)
+			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags, W.armor_penetration, W.force*1.5)
 
 	var/total_damage = 0
-	var/damage_flags = W.damage_flags()
 	for(var/i in 1 to 3)
 		var/damage = min(W.force*1.5, 20)*damage_mod
-		affecting.apply_damage(damage, W.damtype, BP_HEAD, 0, damage_flags, used_weapon=W)
+		affecting.apply_damage(damage, W.damtype, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)
 		total_damage += damage
 
 

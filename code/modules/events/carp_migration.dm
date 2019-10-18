@@ -16,7 +16,7 @@ GLOBAL_VAR(carp_events)
 /datum/event/carp_migration/announce()
 	var/announcement = ""
 	if(no_show)
-		announcement = "A massive migration of unknown biological entities has been detected in the vicinity of the [location_name()] gravity well. Caution is advised."
+		announcement = "A large migration of unknown biological entities has been detected in the vicinity of the [location_name()] gravity well. Caution is advised."
 	else if(severity == EVENT_LEVEL_MAJOR)
 		announcement = "A massive migration of unknown biological entities has been captured by the [location_name()] gravity well. Exercise external operations with caution."
 	else
@@ -27,7 +27,7 @@ GLOBAL_VAR(carp_events)
 	if(no_show)
 		spawn_fish(affecting_z, 1, 1, 1)
 	else if(severity == EVENT_LEVEL_MAJOR)
-		spawn_fish(affecting_z, landmarks_list.len)
+		spawn_fish(affecting_z, rand(20, 25), 2, 4)
 	else if(severity == EVENT_LEVEL_MODERATE)
 		spawn_fish(affecting_z, rand(4, 6)) 			//12 to 30 carp, in small groups
 	else

@@ -25,7 +25,7 @@
 		material_descriptor = pick("rusted","dusty","archaic","fragile")
 	if(istype(I, /obj/item/weapon/material))
 		var/obj/item/weapon/material/M = I
-		M.set_material(MATERIAL_ALIUMIUM)
+		M.set_material(MATERIAL_ALIENALLOY)
 		source_material = "alien alloy"
 	else
 		source_material = pick("cordite","quadrinium","steel","titanium","aluminium","ferritic-alloy","plasteel","duranium")
@@ -142,7 +142,7 @@
 	if(prob(25))
 		new_item = new /obj/item/weapon/material/kitchen/utensil/fork(loc)
 	else if(prob(50))
-		new_item = new /obj/item/weapon/material/kitchen/utensil/knife(loc)
+		new_item = new /obj/item/weapon/material/knife/table(loc)
 	else
 		new_item = new /obj/item/weapon/material/kitchen/utensil/spoon(loc)
 	additional_desc = "[pick("It's like no [item_type] you've ever seen before",\
@@ -194,7 +194,7 @@
 
 /obj/item/weapon/archaeological_find/knife/spawn_item()
 	item_type = "[pick("bladed knife","serrated blade","sharp cutting implement")]"
-	var/obj/item/new_item = new /obj/item/weapon/material/knife(loc)
+	var/obj/item/new_item = new /obj/item/weapon/material/knife/combat(loc)
 	additional_desc = "[pick("It doesn't look safe.",\
 	"It looks wickedly jagged",\
 	"There appear to be [pick("dark red","dark purple","dark green","dark blue")] stains along the edges")]."
@@ -236,7 +236,7 @@
 	var/obj/item/weapon/storage/box/new_box = new(loc)
 	new_box.icon = 'icons/obj/xenoarchaeology.dmi'
 	new_box.max_w_class = pick(ITEM_SIZE_TINY,2;ITEM_SIZE_SMALL,3;ITEM_SIZE_NORMAL,4;ITEM_SIZE_LARGE)
-	var/storage_amount = base_storage_cost(new_box.max_w_class)
+	var/storage_amount = BASE_STORAGE_COST(new_box.max_w_class)
 	new_box.max_storage_space = rand(storage_amount, storage_amount * 10)
 	new_box.icon_state = "box"
 	if(prob(30))
@@ -499,6 +499,7 @@
 	return I
 
 /obj/item/weapon/archaeological_find/remains/robot
+	icon = 'icons/mob/robots_gibs.dmi'
 	icon_state = "remainsrobot"
 	find_type = ARCHAEO_REMAINS_ROBOT
 	descs = list("Almost mistakeable for the remains of a modern cyborg.",\
