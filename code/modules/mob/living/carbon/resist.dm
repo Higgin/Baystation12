@@ -53,10 +53,13 @@
 		var/psi_mod = (1 - (psi.get_rank(PSI_PSYCHOKINESIS)*0.2))
 		breakouttime = max(5, breakouttime * psi_mod)
 
-	visible_message(
-		"<span class='danger'>\The [src] attempts to remove \the [HC]!</span>",
-		"<span class='warning'>You attempt to remove \the [HC] (This will take around [breakouttime / (1 SECOND)] second\s and you need to stand still).</span>"
-		)
+	if(prob(50))
+		visible_message(
+			"<span class='danger'>\The [src] attempts to remove \the [HC]!</span>",
+			"<span class='warning'>You attempt to remove \the [HC] (This will take around [breakouttime / (1 SECOND)] second\s and you need to stand still).</span>"
+			)
+	else
+		to_chat(src, "<span class='warning'>You sneakily attempt to remove \the [HC] (This will take around [breakouttime / (1 SECOND)] second\s and you need to stand still).</span>")
 
 	if(do_after(src, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
 		if(!handcuffed || buckled)
@@ -73,10 +76,11 @@
 					buckled.unbuckle_mob()
 				update_inv_handcuffed()
 				return
-		visible_message(
-			SPAN_WARNING("\The [src] manages to remove \the [handcuffed]!"),
-			SPAN_NOTICE("You successfully remove \the [handcuffed]!")
-			)
+		if(prob(50))
+			visible_message(
+				SPAN_WARNING("\The [src] manages to remove \the [handcuffed]!"),
+				SPAN_NOTICE("You successfully remove \the [handcuffed]!")
+				)
 		drop_from_inventory(handcuffed)
 
 /mob/living/proc/can_break_cuffs()
@@ -127,15 +131,18 @@
 		if(psi && psi.can_use())
 			unbuckle_time = max(0, unbuckle_time - ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS)))
 
-		visible_message(
-			"<span class='danger'>[usr] attempts to unbuckle themself!</span>",
-			"<span class='warning'>You attempt to unbuckle yourself. (This will take around [unbuckle_time / (1 SECOND)] second\s and you need to stand still)</span>"
+		if(prob(50))
+			visible_message(
+				"<span class='danger'>[usr] attempts to unbuckle themself!</span>",
+				"<span class='warning'>You attempt to unbuckle yourself. (This will take around [unbuckle_time / (1 SECOND)] second\s and you need to stand still)</span>"
 			)
-
+		else
+			to_chat(src, "<span class='warning'>You sneakily attempt to unbuckle yourself.(This will take around [unbuckle_time / (1 SECOND)] second\s and you need to stand still)</span>")
 
 		if(!unbuckle_time || do_after(usr, unbuckle_time, incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
 			if(!buckled)
 				return
-			visible_message("<span class='danger'>\The [usr] manages to unbuckle themself!</span>",
-							"<span class='notice'>You successfully unbuckle yourself.</span>")
+			if(prob(50))
+				visible_message("<span class='danger'>\The [usr] manages to unbuckle themself!</span>",
+								"<span class='notice'>You successfully unbuckle yourself.</span>")
 			buckled.user_unbuckle_mob(src)
