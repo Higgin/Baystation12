@@ -131,6 +131,10 @@
 				var/mob/living/carbon/human/H = M
 				if(H.is_cloaked())
 					. += M
+					if((istype(H.back,/obj/item/weapon/rig)) && (H in range(1,center)))
+						var/obj/item/weapon/rig/R = H.back
+						for(var/obj/item/rig_module/stealth_field/S in R.installed_modules)
+							S.deactivate()
 			else if(M.alpha < 255)
 				. += M
 			else if(round_is_spooky() && isobserver(M))
